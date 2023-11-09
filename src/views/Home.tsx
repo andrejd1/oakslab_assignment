@@ -55,17 +55,30 @@ const Home: React.FC = () => {
     localStorage.setItem('phases', JSON.stringify(phases));
   };
   
-  const canMarkTask = (phaseId: number) => {
-    // Check if all tasks in the previous phase are completed
-    if (phaseId > 1) {
-      const prevPhase = phases.find((phase) => phase.id === phaseId - 1);
-      return prevPhase?.tasks.every((task) => task.completed);
+  const canMarkTask = (phaseId: number, taskId: number) => {
+    // Allow marking tasks in the next phase if the current phase is completed
+    const currentPhaseIndex = phases.findIndex((phase) => phase.id === phaseId);
+    if (currentPhaseIndex > 0) {
+      const previousPhase = phases[currentPhaseIndex - 1];
+      return previousPhase.tasks.every((task) => task.completed);
     }
-    return true; // If it's the first phase, allow marking tasks
+    
+    // Allow marking the first task in a phase without restrictions
+    if (taskId === 1) {
+      return true;
+    }
+    
+    // Check if all preceding tasks in the same phase are completed
+    const currentPhase = phases.find((phase) => phase.id === phaseId);
+    const precedingTasks = currentPhase?.tasks.filter((task) => task.id < taskId) || [];
+    return (
+      precedingTasks.every((task) => task.completed) &&
+      currentPhase?.tasks.every((task) => task.id <= taskId)
+    );
   };
   
   const handleTaskToggle = (phaseId: number, taskId: number) => {
-    if (canMarkTask(phaseId)) {
+    if (canMarkTask(phaseId, taskId)) {
       const updatedPhases = phases.map((phase) => {
         if (phase.id === phaseId) {
           const updatedTasks = phase.tasks.map((task) =>
@@ -79,7 +92,7 @@ const Home: React.FC = () => {
       setPhases(updatedPhases);
       saveToLocalStorage();
     } else {
-      alert('Complete all tasks in the previous phase first.');
+      alert('Complete all preceding tasks in the same phase first.');
     }
   };
   
@@ -99,7 +112,7 @@ const Home: React.FC = () => {
                     checked={task.completed}
                     onChange={() => handleTaskToggle(phase.id, task.id)}
                     color="primary"
-                    disabled={!canMarkTask(phase.id)}
+                    disabled={!canMarkTask(phase.id, task.id)}
                   />
                 }
                 label={task.description}
