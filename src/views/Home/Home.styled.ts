@@ -16,7 +16,7 @@ export const PhaseHeaderContainer = styled.div<{ $canUndoPhase: boolean }>`
   justify-content: space-between;
   margin-bottom: 1rem;
 
-  h3 {
+  > h3 {
     color: ${(props) => (props.$canUndoPhase ? "steelblue" : "gray")};
     margin-left: 1rem;
   }
