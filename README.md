@@ -1,27 +1,70 @@
-# React + TypeScript + Vite
+# Startup Progress Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple web application to track the progress of your startup with different phases and tasks. This project is built using React, Vite, TypeScript, and Material-UI for styling components.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+- [Contributors](#contributors)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Create different phases for your startup.
+- Add an unlimited number of tasks to each phase.
+- Mark tasks as completed or reopen them.
+- Store progress in local storage for persistence.
+- Unlock the next phase when all tasks in the current phase are completed.
+- Display a random fact from [uselessfacts.jsph.pl](https://uselessfacts.jsph.pl/random.json) when all phases are completed.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+To run this project on your local machine, follow these steps:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd startup-progress-tracker
+   ```
+
+2. Install the necessary dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to use the application.
+
+## Usage
+
+Start the application as described in the Installation section.
+Create phases for your startup by specifying their names and adding tasks in /seeds/seed.ts.
+Mark tasks as completed by clicking the checkboxes.
+Reopen tasks if needed.
+Progress is automatically stored in local storage for future sessions.
+Unlock the next phase when all tasks in the current phase are completed.
+When all phases are completed, a random fact will be displayed in a modal popup.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Acknowledgments
+
+This project was created as a sample application for educational purposes.
+The random facts are fetched from [uselessfacts.jsph.pl](https://uselessfacts.jsph.pl/random.json).
+
+## Contributors
+
+[Thien Long Ngo](https://github.com/andrejd1)
+Feel free to contribute, report issues, and suggest improvements to this project.
