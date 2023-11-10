@@ -140,8 +140,7 @@ const Home: React.FC = () => {
               <Typography variant="h4">{phase.name}</Typography>
             </PhaseHeaderTitleContainer>
             <Typography
-              variant="h3"
-              // color="steelblue"
+              variant="h4"
               onClick={() => {
                 if (canUndoPhase(phaseIndex)) handleUndo(phaseIndex);
               }}
