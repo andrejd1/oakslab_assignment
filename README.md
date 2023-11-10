@@ -37,10 +37,18 @@ To run this project on your local machine, follow these steps:
    npm install
    ```
 
+   ```bash
+   yarn
+   ```
+
 3. Start the development server:
 
    ```bash
    npm run dev
+   ```
+   
+   ```bash
+   yarn dev
    ```
 
 4. Open your browser and go to [http://localhost:5173/](http://localhost:5173/) to use the application.
