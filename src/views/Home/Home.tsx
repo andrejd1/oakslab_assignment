@@ -10,23 +10,12 @@ import {
   PhaseHeaderTitleContainer,
 } from "./Home.styled";
 import StyledPaper from "../../components/Paper/Paper.tsx";
+import { motion } from "framer-motion";
 
 const Home: React.FC = () => {
   const [appData, setAppData] = useState<AppData>(initialData);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [randomFact, setRandomFact] = useState<string | null>(null);
-
-  useEffect(() => {
-    const storedData = localStorage.getItem("appData");
-    if (storedData) {
-      setAppData(JSON.parse(storedData));
-    }
-  }, []);
-
-  const saveToLocalStorage = (data: AppData) => {
-    localStorage.setItem("appData", JSON.stringify(data));
-  };
-
   const areAllPhasesCompleted = useMemo(
     () =>
       appData.phases.every((phase) =>
@@ -34,6 +23,13 @@ const Home: React.FC = () => {
       ),
     [appData.phases],
   );
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("appData");
+    if (storedData) {
+      setAppData(JSON.parse(storedData));
+    }
+  }, []);
 
   useEffect(() => {
     if (areAllPhasesCompleted) {
@@ -72,6 +68,10 @@ const Home: React.FC = () => {
 
     // Check if the task is within the current phase
     return taskIndex < currentPhase.tasks.length;
+  };
+
+  const saveToLocalStorage = (data: AppData) => {
+    localStorage.setItem("appData", JSON.stringify(data));
   };
 
   const handleTaskToggle = (phaseIndex: number, taskIndex: number) => {
@@ -141,14 +141,23 @@ const Home: React.FC = () => {
               <NumberBadge count={phaseIndex + 1} />
               <Typography variant="h4">{phase.name}</Typography>
             </PhaseHeaderTitleContainer>
-            <Typography
-              variant="h4"
-              onClick={() => {
-                if (canUndoPhase(phaseIndex)) handleUndo(phaseIndex);
-              }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              whileHover={{ scale: canUndoPhase(phaseIndex) ? 2 : 1 }}
+              whileTap={{ scale: canUndoPhase(phaseIndex) ? 0.5 : 1 }}
             >
-              {phase.tasks.every((task) => task.completed) && " ✔"}
-            </Typography>
+              <Typography
+                variant="h4"
+                onClick={() => {
+                  if (canUndoPhase(phaseIndex)) handleUndo(phaseIndex);
+                }}
+              >
+                {phase.tasks.every((task) => task.completed) && " ✔"}
+              </Typography>
+            </motion.div>
           </PhaseHeaderContainer>
           {phase.tasks.map((task, taskIndex) => (
             <FormControlLabel

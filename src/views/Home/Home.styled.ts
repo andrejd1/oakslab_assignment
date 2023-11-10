@@ -22,7 +22,7 @@ export const PhaseHeaderContainer = styled.div<{ $canUndoPhase: boolean }>`
     cursor: pointer;
   `}
 
-  > h4 {
+  > div:nth-child(2) > h4 {
     color: ${(props) => (props.$canUndoPhase ? "steelblue" : "gray")};
     margin-left: 1rem;
   }

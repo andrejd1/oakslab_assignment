@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ModalDialogProps } from "./ModalDialog.types.ts";
+import { motion } from "framer-motion";
 
 const ModalDialog = ({
   openDialog,
@@ -14,8 +15,17 @@ const ModalDialog = ({
   title,
   content,
 }: ModalDialogProps) => {
+  const DialogMotion = motion(Dialog);
+
   return (
-    <Dialog open={openDialog} onClose={handleCloseDialog}>
+    <DialogMotion
+      initial={{ opacity: 0, scale: 2 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6 }}
+      exit={{ opacity: 0 }}
+      open={openDialog}
+      onClose={handleCloseDialog}
+    >
       <DialogTitle variant="h4">{title}</DialogTitle>
       <DialogContent>
         <Typography>{content}</Typography>
@@ -25,7 +35,7 @@ const ModalDialog = ({
           Close
         </Button>
       </DialogActions>
-    </Dialog>
+    </DialogMotion>
   );
 };
 
