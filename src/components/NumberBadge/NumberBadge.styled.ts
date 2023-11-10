@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { device } from "../../utils/breakpoints.ts";
 
 export const NumberBadgeContainer = styled.div`
-  width: 3rem;
-  height: 3rem;
+  min-width: 3rem;
+  min-height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,10 +11,4 @@ export const NumberBadgeContainer = styled.div`
   background-color: black;
   color: white;
   border-radius: 50%;
-
-  @media ${device.mobileL} {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1rem;
-  }
 `;

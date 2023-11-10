@@ -53,7 +53,9 @@ To run this project on your local machine, follow these steps:
 4. Reopen tasks if needed.
 5. Progress is automatically stored in local storage for future sessions.
 6. Unlock the next phase when all tasks in the current phase are completed.
-7. When all phases are completed, a random fact will be displayed in a modal popup.
+7. When all tasks in a phase are completed then all tasks in that phase will be disabled.
+8. You can undo phase by clicking on the blue tick next to the finished phase.
+9. When all phases are completed, a random fact will be displayed in a modal popup.
 
 
 ## Deployment
