@@ -47,13 +47,13 @@ To run this project on your local machine, follow these steps:
 
 ## Usage
 
-Start the application as described in the Installation section.
-Create phases for your startup by specifying their names and adding tasks in /seeds/seed.ts.
-Mark tasks as completed by clicking the checkboxes.
-Reopen tasks if needed.
-Progress is automatically stored in local storage for future sessions.
-Unlock the next phase when all tasks in the current phase are completed.
-When all phases are completed, a random fact will be displayed in a modal popup.
+1. Start the application as described in the Installation section.
+2. Create phases for your startup by specifying their names and adding tasks in /seeds/seed.ts.
+3. Mark tasks as completed by clicking the checkboxes.
+4. Reopen tasks if needed.
+5. Progress is automatically stored in local storage for future sessions.
+6. Unlock the next phase when all tasks in the current phase are completed.
+7. When all phases are completed, a random fact will be displayed in a modal popup.
 
 ## License
 
@@ -61,10 +61,10 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Acknowledgments
 
-This project was created as a sample application for educational purposes.
-The random facts are fetched from [uselessfacts.jsph.pl](https://uselessfacts.jsph.pl/random.json).
+- This project was created as a sample application for educational purposes.
+- The random facts are fetched from [uselessfacts.jsph.pl](https://uselessfacts.jsph.pl/random.json).
 
 ## Contributors
 
-[Thien Long Ngo](https://github.com/andrejd1)
+- [Thien Long Ngo](https://github.com/andrejd1)
 Feel free to contribute, report issues, and suggest improvements to this project.
