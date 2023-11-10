@@ -55,6 +55,10 @@ To run this project on your local machine, follow these steps:
 6. Unlock the next phase when all tasks in the current phase are completed.
 7. When all phases are completed, a random fact will be displayed in a modal popup.
 
+
+## Deployment
+- The project is deployed to [vercel](https://oakslab-assignment-ten.vercel.app/)
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
