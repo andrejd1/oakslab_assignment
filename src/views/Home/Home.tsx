@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import { AppData } from "../../types/common";
 import { initialData } from "../../seeds/seed";
@@ -27,11 +27,15 @@ const Home: React.FC = () => {
     localStorage.setItem("appData", JSON.stringify(data));
   };
 
-  useEffect(() => {
-    const areAllPhasesCompleted = appData.phases.every((phase) =>
-      phase.tasks.every((task) => task.completed),
-    );
+  const areAllPhasesCompleted = useMemo(
+    () =>
+      appData.phases.every((phase) =>
+        phase.tasks.every((task) => task.completed),
+      ),
+    [appData.phases],
+  );
 
+  useEffect(() => {
     if (areAllPhasesCompleted) {
       fetch("https://uselessfacts.jsph.pl/random.json")
         .then((response) => response.json())
@@ -43,7 +47,7 @@ const Home: React.FC = () => {
           console.error("Failed to fetch a random fact:", error),
         );
     }
-  }, [appData]);
+  }, [areAllPhasesCompleted]);
 
   const canMarkTask = (phaseIndex: number, taskIndex: number) => {
     const currentPhase = appData.phases[phaseIndex];
