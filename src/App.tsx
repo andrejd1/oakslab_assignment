@@ -1,4 +1,3 @@
-import "./App.css";
 import Home from "./views/Home/Home.tsx";
 import React from "react";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
