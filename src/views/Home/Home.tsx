@@ -28,13 +28,11 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    const areAllPhasesCompleted = () => {
-      return appData.phases.every((phase) =>
-        phase.tasks.every((task) => task.completed),
-      );
-    };
+    const areAllPhasesCompleted = appData.phases.every((phase) =>
+      phase.tasks.every((task) => task.completed),
+    );
 
-    if (areAllPhasesCompleted()) {
+    if (areAllPhasesCompleted) {
       fetch("https://uselessfacts.jsph.pl/random.json")
         .then((response) => response.json())
         .then((data) => {
