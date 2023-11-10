@@ -36,7 +36,7 @@ To run this project on your local machine, follow these steps:
    ```bash
    npm install
    ```
-
+   or
    ```bash
    yarn
    ```
@@ -46,7 +46,7 @@ To run this project on your local machine, follow these steps:
    ```bash
    npm run dev
    ```
-   
+   or
    ```bash
    yarn dev
    ```
