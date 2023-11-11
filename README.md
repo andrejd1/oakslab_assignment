@@ -56,14 +56,15 @@ To run this project on your local machine, follow these steps:
 ## Usage
 
 1. Start the application as described in the Installation section.
-2. Create phases for your startup by specifying their names and adding tasks in /seeds/seed.ts.
-3. Mark tasks as completed by clicking the checkboxes.
-4. Reopen tasks if needed.
-5. Progress is automatically stored in local storage for future sessions.
-6. Unlock the next phase when all tasks in the current phase are completed.
-7. When all tasks in a phase are completed then all tasks in that phase will be disabled.
-8. You can undo phase by clicking on the blue tick next to the finished phase.
-9. When all phases are completed, a random fact will be displayed in a modal popup.
+2. The app theme (light or dark mode) is automatically set by your OS theme preference.
+3. Create phases for your startup by specifying their names and adding tasks in /seeds/seed.ts.
+4. Mark tasks as completed by clicking the checkboxes.
+5. Reopen tasks if needed.
+6. Progress is automatically stored in local storage for future sessions.
+7. Unlock the next phase when all tasks in the current phase are completed.
+8. When all tasks in a phase are completed then all tasks in that phase will be disabled.
+9. You can undo phase by clicking on the blue tick next to the finished phase.
+10. When all phases are completed, a random fact will be displayed in a modal popup.
 
 
 ## Deployment
