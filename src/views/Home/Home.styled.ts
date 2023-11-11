@@ -31,7 +31,7 @@ export const PhaseHeaderContainer = styled.div<{ $canUndoPhase: boolean }>`
     flex-direction: column;
     justify-content: center;
 
-    h4 {
+    > div:nth-child(2) > h4 {
       margin-left: 0;
     }
   }
