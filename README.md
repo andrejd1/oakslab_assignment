@@ -82,5 +82,5 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ## Contributors
 
 - [Thien Long Ngo](https://github.com/andrejd1)\
-Feel free to contribute, report issues, and suggest improvements to this project.\
+Feel free to report issues, and suggest improvements to this project.\
 Happy tracking your startup progress!
