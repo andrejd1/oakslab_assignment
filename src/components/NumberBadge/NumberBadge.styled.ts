@@ -13,7 +13,7 @@ export const NumberBadgeContainer = styled.div`
   color: white;
   border-radius: 50%;
 
-  @media ${device.mobileL} {
+  @media only screen and ${device.mobileL} {
     margin-right: 0;
     margin-bottom: 1rem;
   }

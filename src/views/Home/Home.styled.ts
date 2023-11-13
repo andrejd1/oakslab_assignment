@@ -27,7 +27,7 @@ export const PhaseHeaderContainer = styled.div<{ $canUndoPhase: boolean }>`
     margin-left: 1rem;
   }
 
-  @media ${device.mobileL} {
+  @media only screen and ${device.mobileL} {
     flex-direction: column;
     justify-content: center;
 
@@ -41,7 +41,7 @@ export const PhaseHeaderTitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  @media ${device.mobileL} {
+  @media only screen and ${device.mobileL} {
     flex-direction: column;
     justify-content: center;
   }
