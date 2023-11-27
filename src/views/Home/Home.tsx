@@ -11,6 +11,7 @@ import {
 } from "./Home.styled";
 import StyledPaper from "../../components/Paper/Paper.tsx";
 import { motion } from "framer-motion";
+import ReactConfetti from "react-confetti";
 
 const Home: React.FC = () => {
   const [appData, setAppData] = useState<AppData>(initialData);
@@ -175,12 +176,15 @@ const Home: React.FC = () => {
           ))}
         </PhaseContainer>
       ))}
-      <ModalDialog
-        openDialog={openDialog}
-        handleCloseDialog={handleCloseDialog}
-        title={"Congratulations! 🥳🎉"}
-        content={randomFact ?? "Sorry, we couldn't find a random fact."}
-      />
+      {openDialog && <>
+        <ReactConfetti />
+        <ModalDialog
+          openDialog={openDialog}
+          handleCloseDialog={handleCloseDialog}
+          title={"Congratulations! 🥳🎉"}
+          content={randomFact ?? "Sorry, we couldn't find a random fact."}
+        />
+      </>}
     </StyledPaper>
   );
 };
