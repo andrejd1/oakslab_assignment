@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Checkbox, FormControlLabel, Typography } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  styled,
+  Typography,
+  Pagination as MuiPagination,
+} from "@mui/material";
 import { AppData } from "../../types/common";
 import { initialData } from "../../seeds/seed";
 import ModalDialog from "../../components/ModalDialog/ModalDialog";
@@ -9,14 +15,25 @@ import {
   PhaseHeaderContainer,
   PhaseHeaderTitleContainer,
 } from "./Home.styled";
-import StyledPaper from "../../components/Paper/Paper.tsx";
+import StyledPaper from "../../components/Paper/Paper";
 import { motion } from "framer-motion";
 import ReactConfetti from "react-confetti";
+
+const Pagination = styled(MuiPagination)`
+  margin-top: 3rem;
+  ul {
+    display: flex;
+    place-content: center;
+  }
+`;
 
 const Home: React.FC = () => {
   const [appData, setAppData] = useState<AppData>(initialData);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [randomFact, setRandomFact] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const itemsPerPage = 3;
+
   const areAllPhasesCompleted = useMemo(
     () =>
       appData.phases.every((phase) =>
@@ -95,6 +112,13 @@ const Home: React.FC = () => {
     saveToLocalStorage(updatedData);
   };
 
+  const handlePageChange = (
+    _event: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
+    setPage(value);
+  };
+
   const handleUndo = (phaseIndex: number) => {
     const updatedData: AppData = {
       ...appData,
@@ -135,56 +159,67 @@ const Home: React.FC = () => {
   return (
     <StyledPaper>
       <Typography variant="h3">{appData.title}</Typography>
-      {appData.phases.map((phase, phaseIndex) => (
-        <PhaseContainer key={phase.id}>
-          <PhaseHeaderContainer $canUndoPhase={canUndoPhase(phaseIndex)}>
-            <PhaseHeaderTitleContainer>
-              <NumberBadge count={phaseIndex + 1} />
-              <Typography variant="h4">{phase.name}</Typography>
-            </PhaseHeaderTitleContainer>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              whileHover={{ scale: canUndoPhase(phaseIndex) ? 2 : 1 }}
-              whileTap={{ scale: canUndoPhase(phaseIndex) ? 0.5 : 1 }}
-            >
-              <Typography
-                variant="h4"
-                onClick={() => {
-                  if (canUndoPhase(phaseIndex)) handleUndo(phaseIndex);
-                }}
+      {appData.phases
+        .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+        .map((phase, phaseIndex) => (
+          <PhaseContainer key={phase.id}>
+            <PhaseHeaderContainer $canUndoPhase={canUndoPhase(phaseIndex)}>
+              <PhaseHeaderTitleContainer>
+                <NumberBadge count={phaseIndex + 1} />
+                <Typography variant="h4">{phase.name}</Typography>
+              </PhaseHeaderTitleContainer>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                whileHover={{ scale: canUndoPhase(phaseIndex) ? 2 : 1 }}
+                whileTap={{ scale: canUndoPhase(phaseIndex) ? 0.5 : 1 }}
               >
-                {phase.tasks.every((task) => task.completed) && " ✔"}
-              </Typography>
-            </motion.div>
-          </PhaseHeaderContainer>
-          {phase.tasks.map((task, taskIndex) => (
-            <FormControlLabel
-              key={task.id}
-              control={
-                <Checkbox
-                  checked={task.completed}
-                  onChange={() => handleTaskToggle(phaseIndex, taskIndex)}
-                  color="primary"
-                  disabled={!canMarkTask(phaseIndex, taskIndex)}
-                />
-              }
-              label={task.description}
-            />
-          ))}
-        </PhaseContainer>
-      ))}
-      {openDialog && <>
-        <ReactConfetti />
-        <ModalDialog
-          openDialog={openDialog}
-          handleCloseDialog={handleCloseDialog}
-          title={"Congratulations! 🥳🎉"}
-          content={randomFact ?? "Sorry, we couldn't find a random fact."}
-        />
-      </>}
+                <Typography
+                  variant="h4"
+                  onClick={() => {
+                    if (canUndoPhase(phaseIndex)) handleUndo(phaseIndex);
+                  }}
+                >
+                  {phase.tasks.every((task) => task.completed) && " ✔"}
+                </Typography>
+              </motion.div>
+            </PhaseHeaderContainer>
+            {phase.tasks.map((task, taskIndex) => (
+              <FormControlLabel
+                key={task.id}
+                control={
+                  <Checkbox
+                    checked={task.completed}
+                    onChange={() => handleTaskToggle(phaseIndex, taskIndex)}
+                    color="primary"
+                    disabled={!canMarkTask(phaseIndex, taskIndex)}
+                  />
+                }
+                label={task.description}
+              />
+            ))}
+          </PhaseContainer>
+        ))}
+
+      <Pagination
+        count={Math.ceil(appData.phases.length / itemsPerPage)}
+        page={page}
+        onChange={handlePageChange}
+      />
+
+      {openDialog && (
+        <>
+          <ReactConfetti />
+          <ModalDialog
+            openDialog={openDialog}
+            handleCloseDialog={handleCloseDialog}
+            title={"Congratulations! 🥳🎉"}
+            content={randomFact ?? "Sorry, we couldn't find a random fact."}
+          />
+        </>
+      )}
     </StyledPaper>
   );
 };

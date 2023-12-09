@@ -1,5 +1,22 @@
 import { AppData } from "../types/common.ts";
 
+// Function to generate more phases
+function generateMorePhases() {
+  let newPhases = [];
+  for (let i = 4; i <= 103; i++) {
+    let newPhase = {
+      id: i,
+      name: "Phase " + i,
+      tasks: [
+        { id: i*2 - 1, description: "Task " + (i*2 - 1), completed: false },
+        { id: i*2, description: "Task " + i*2, completed: false },
+      ],
+    };
+    newPhases.push(newPhase);
+  }
+  return newPhases;
+}
+
 export const initialData: AppData = {
   title: "My startup progress",
   phases: [
@@ -29,5 +46,6 @@ export const initialData: AppData = {
         { id: 8, description: "Release MVP", completed: false },
       ],
     },
+    ...generateMorePhases(),
   ],
 };
